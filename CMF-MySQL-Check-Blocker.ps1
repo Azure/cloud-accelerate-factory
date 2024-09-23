@@ -12,7 +12,7 @@ if (-not $ResourceGroup -or -not $ServerName) {
     Write-Host "Usage: .\CMF-MySQL-Check-Blocker.ps1 -ResourceGroup <resource-group> -ServerName <server-name>"
     exit 1
 }
-$Subscription=(Get-AzContext).Subscription.id
+$Subscription=az account show --query id --output tsv
 if($Subscription -eq $null)
 {
 Write-host "Invalid Resource group or Server name or check subscription context using 'Get-AzContext' " -ForegroundColor red
@@ -142,6 +142,3 @@ Write-Host "********************************************************************
  Write-Host "Infrastructure double encryption is [$DoubleEncryption] on MySQL server [$ServerName]" -ForegroundColor Green
  }
  Write-Host "********************************************************************************************************************`n`n`n"
-
-
-
