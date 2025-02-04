@@ -31,8 +31,8 @@ Azure CLI  ( e.g. /usr/bin/az )<br />
 MariaDB Client ( e.g. /usr/bin/mysql )<br />
 
 ## Step1. Azure CLI Info Gathering (Only for Azure Database for MariaDB Single Servers)
-1.	Download the package zip file named `MariaDB-Info-Gather.zip`
-2.	Extract the `unzip MariaDB-Info-Gather.zip` file.
+1.	Download the package zip file named `Info-Gather-MariaDB.zip`
+2.	Extract the `unzip Info-Gather-MariaDB.zip` file.
 3.	Open the Input file `Azure_Subscription.csv` (Provide the Tenant ID & Subscription ID, add Multiple rows for Multiple Subscriptions)  
 4.	Execute `powershell.exe .\CMF-MariaDB-CLI-Windows.ps1` (Windows)
 5.  Execute `pwsh ./CMF-MariaDB-CLI-Linux.ps1` (Linux)
