@@ -1,35 +1,41 @@
-# Project
+# Steps To-Do:<br />
 
-CSU Migration Factory
+**OS Support**<br />
+This script is compatible with the following operating systems:<br />
+Windows 10 or later<br />
+Linux RHEL v7 or later , Ubuntu v14 or later<br />
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+**Pre-requisites**<br />
 
-As the maintainer of this project, please make a few updates:
+Execute below prior running Powershell scripts<br />
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy bypass
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+***Windows***<br />
+Powershell -   https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4<br /> 
+Mongo client - https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/<br />
+Azure CLI (For Single Server and Microsoft Entra ID authentication only) - https://aka.ms/installazurecliwindows )<br /> 
 
-## Contributing
+***Linux***<br />
+Powershell - https://learn.microsoft.com/en-us/powershell/scripting/install/install-rhel?view=powershell-7.4<br /> 
+Mongo Client - https://www.mongodb.com/docs/manual/administration/install-on-linux/<br />
+Azure CLI (For Single Server and Microsoft Entra ID) - https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux/<br /> 
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+**Note**: - Add PATH in Enviornment Variables<br />
+	
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+## Step1. Download and run the infogather script
+## Step2. Download the script from the git link https://github.com/customer-success-microsoft/csu-mongo-mf/tree/dev/PUBLIC
+## Step3. Update 'CMF_Mongo_Input_File.csv'
+"**Host_Name**","**Port**","**User_ID**","**Password**","**JSON_Output**","TLS_Certicate_Path","CA_Certificate_Path","**Approval_Status**"
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+**Note:-**<br />
+. Highlighted are **Mandatory Fields**<br />
+. Update Mandatory fields manually in case of Azure VM / On-premises Servers <br />
+. If a **Password** is not provided, this requires interactive console input of the password for each server. 
+. For credentials handling methods refer to [Passing credentials](#passing-credentials)
+<br />
+## Step4. Execute `pwsh CMF-MongoDB-Linux.ps1`
+## Step5. Once the execution completed, you can check the output & Logs folder.
+## Step6. Zip the Output Folder and share to CMF Team
 
-## Trademarks
-
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+       
