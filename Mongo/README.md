@@ -22,7 +22,8 @@ Mongo Client - https://www.mongodb.com/docs/manual/administration/install-on-lin
 #### curl -L -o Info-Gather-Mongo.zip https://github.com/Azure/csu-migration-factory/raw/dev/Mongo/Info-Gather-Mongo.zip
 ## Step2. Unzip Info-Gather-Mongo.zip , cd ./csu-mongo-mf-main/PUBLIC
 ## Step3. Update 'CMF_Mongo_Input_File.csv'
-"**Host_Name**","**Port**","**User_ID**","**Password**","**Auth_DB**","TLS_Certicate_Path","CA_Certificate_Path","**Approval_Status**"
+"**Host_Name**","**Port**","**User_ID**","**Password**","**Auth_DB**","TLS_Certicate_Path","CA_Certificate_Path","**Approval_Status**"<br />
+
 **Note:-**<br />
 . Highlighted are **Mandatory Fields**<br />
 . Update Mandatory fields manually in CMF_Mongo_Input_File.csv <br />
