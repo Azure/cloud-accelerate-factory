@@ -57,28 +57,31 @@ MySQL Client ( e.g. /usr/bin/mysql )<br />
 2.  Execute `pwsh ./CMF-MySQL-Linux.ps1` ( Linux )
 3.	Once the execution completed, you can check the output & Logs folder.
 
-## Step4. Azure VM/On-premises Servers  (Only for On-Premises / Azure VM / Other Cloud Servers)
+## Step4. Azure CLI Info Gathering Flexi Migration  (For Resiliency / Post Migration)
+1. Execute `powershell.exe .\CMF-MySQL-FlexiCLI-Windows.ps1` (Windows)
+2. Execute `pwsh ./CMF-MySQL-FlexiCLI-Linux.ps1` (Linux)
+3. Once the execution completed, you can check the Output/Flexi folder.
+
+## Step5. Azure VM/On-premises Servers  (Only for On-Premises / Azure VM / Other Cloud Servers)
 . Refer document `CMF-ON-Prem_Server_Info_gather.docx` from the zip folder and update details and share document.<br />
 
-fullyQualifiedDomainName| sku.capacity | storageProfile.storageMb | sku.tier | version | name | region | location | ha |read_replica | environment | server_type | migration_path | approved
 
-Note:- Update CMF_MySQL_Server_List.csv file as per above format and ensure “name” matching with "logfilename".
+id | sku.name | fullyQualifiedDomainName | sku.capacity | sku.storage | sku.tier | version | logname | region | location | ha |read_replica | environment | server_type | migration_path | approved
 
+Note:- Update CMF_MySQL_Server_List.csv file as per above format and ensure “logname” matching with "logfilename".
+
+       sku.name = instance-type
        sku.capacity = Cores
-       storageProfile.storageMb = Memory
-       name = logfilename
-       sku.tier = AWS_RDS_General_Purpose, AWS_RDS_Memory_Optimized, AWS_Aurora_General_Purpose, AWS_Aurora_Memory_Optimized, GCP_CloudSQL_Enterprise, Azure_VM, GCP_VM, AWS_VM, Onprem_VM, K8s_Cluster_Node
+       sku.storage = Memory
+       logname = logfilename 
+       sku.tier = AWS_RDS_GeneralPurpose, AWS_RDS_MemoryOptimized, AWS_Aurora_GeneralPurpose, AWS_Aurora_MemoryOptimized, GCP_CloudSQL_Enterprise, Azure_VM, GCP_VM, AWS_VM, Onprem_VM, K8s_Cluster_Node
 
-## Step5. Zip and share output, log folders (For All Servers) 
+
+
+## Step6. Zip and share output, log folders (For All Servers) 
 Kindly follow the execution instructions mentioned in attached documents. 
 If there is/are any queries, please let us know, we will connect and check.
 
-
-## Step6. Azure CLI Info Gathering Post Migration  (For All Servers)
-1. Open the Input file `Azure_Subscription.csv` (Provide the Tenant ID & Subscription ID, add Multiple rows for Multiple Subscriptions)
-2. Execute `powershell.exe .\CMF-MySQL-PostCLI-Windows.ps1` (Windows)
-3. Execute `pwsh ./CMF-MySQL-PostCLI-Linux.ps1` (Linux)
-4. Once the execution completed, you can check the output & Logs folder.
 
 **Disclaimer:**
 These scripts are intended for use of Info Gather Assessment utility and do not interact with the user databases or gather any sensitive information (e.g passwords, PI data etc.). 
@@ -110,37 +113,3 @@ Step1. Create and Update CMF_MySQL_Server_Input_file.csv (For All Servers)
 Step2. Open CMD prompt with Run as Admin  
 Step3. Execute `CMF-Mysql-Manual-Windows.bat`( Windows )
         Execute `sh ./CMF-Mysql-Manual-Linux.txt`( Linux )
-
-
-
- 
-## MySQL single to MySQL Flexible server migration using Azure CLI
-# Steps To-Do:
-
-1.	If you have "CMF_MySQL_Server_Input_file.csv" input file ready which cointains single server info, go to step 3 
-	otherwise proceed with next step to generate the input CSV file.
-
-2. 	Execute `powershell .\CMF-MySQL-CLI-Windows.ps1` on command prompt.(for Windows )
-	Execute `pwsh .\CMF-MySQL-CLI-Windows.ps1`(for Linux )
-	This will generate the CSV input file - "CMF_MySQL_Server_Input_file.csv".
-	Also this will generate the single server info/log to output folder.
-   	
-3. 	Open the Inut file "CMF_MySQL_Server_Input_file.csv" make sure correct server data with approved columns. 
-   	Mandatory fields are listed below...
-	
-4. 	Once input CSV file "CMF_MySQL_Server_Input_file.csv" was verified...
-	execute  `powershell .\CMF-MySQL_Azure_SingleServer_to_Flexible.ps1` on command prompt.(for Windows )
-	Execute `pwsh CMF-MySQL_Azure_SingleServer_to_Flexible.ps1`(for Linux )
-
-5.	Once the execution completed, review final status table.Also you can check the output & Logs folder.
-
-## more info
-. Please refer to document “CMF - MySQL_Azure_Single_Server_to_Flexible - User Guide V1.0.docx” from the zip folder for more details.
-
-## Update CMF_MySQL_Server_Input_file.csv 
-
-"**Host_Name**","Resource_Group","**Port**","VCore","**User_ID**","**Password**","Auth_Type","**DB_Name**","Tenant","Subscription_ID","**Approval_Status**","SSL_Mode","SSL_Cert","**Migration_mode**","**Destination**","Tier","sku-name","storage-size","admin-user","admin-password"
-
- Note:- **Mandatory Fields** 
-
-       
