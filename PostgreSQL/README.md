@@ -61,27 +61,29 @@ PostgreSQL Client ( e.g. /usr/bin/psql )<br />
     This data will be used for assessment.
     Option 2 - Perform Detailed Information gathering.(Optional)
 
-## Step4. Azure VM/On-premises Servers  (Only for On-Premises / Azure VM / Other Cloud Servers)
+## Step4. Azure CLI Info Gathering Flexi servers (For Resiliency / Post Migration)
+1. Execute `powershell.exe .\CMF-PostgreSQL-FlexiCLI-Windows.ps1` (Windows)
+2. Execute `pwsh ./CMF-PostgreSQL-FlexiCLI-Linux.ps1` (Linux)
+3. Once the execution completed, you can check the Output/Flexi folder.
+
+
+## Step5. Azure VM/On-premises Servers  (Only for On-Premises / Azure VM / Other Cloud Servers)
 . Refer document `CMF-ON-Prem_Server_Info_gather.docx` from the zip folder and update details and share document.<br />
 
-fullyQualifiedDomainName| sku.capacity | storageProfile.storageMb | sku.tier | version | name | region | location | ha |read_replica | environment | server_type | migration_path | approved
+id | sku.name | fullyQualifiedDomainName | sku.capacity | sku.storage | sku.tier | version | logname | region | location | ha |read_replica | environment | server_type | migration_path | approved
 
-Note:- Update CMF_PostgreSQL_Server_List.csv file as per above format and ensure “name” matching with "logfilename".
+Note:- Update CMF_PostgreSQL_Server_List.csv file as per above format and ensure “logname” matching with "logfilename".
 
+       sku.name = instance-type
        sku.capacity = Cores
-       storageProfile.storageMb = Memory
-       name = logfilename
-       sku.tier = AWS_RDS_General_Purpose, AWS_RDS_Memory_Optimized, AWS_Aurora_General_Purpose, AWS_Aurora_Memory_Optimized, GCP_CloudSQL_Enterprise, Azure_VM, GCP_VM, AWS_VM, Onprem_VM, K8s_Cluster_Node
+       sku.storage = Memory
+       logname = logfilename 
+       sku.tier = AWS_RDS_GeneralPurpose, AWS_RDS_MemoryOptimized, AWS_Aurora_GeneralPurpose, AWS_Aurora_MemoryOptimized, GCP_CloudSQL_Enterprise, Azure_VM, GCP_VM, AWS_VM, Onprem_VM, K8s_Cluster_Node
 
-## Step5. Zip and share output, log folders (For All Servers) 
+## Step6. Zip and share output, log folders (For All Servers) 
 Kindly follow the execution instructions mentioned in attached documents. 
 If there is/are any queries, please let us know, we will connect and check.
 
-## Step6. Azure CLI Info Gathering Post Migration  (For All Servers)
-1. Open the Input file `Azure_Subscription.csv` (Provide the Tenant ID & Subscription ID, add Multiple rows for Multiple Subscriptions)  
-2. Execute `powershell.exe .\CMF-PostgreSQL-PostCLI-Windows.ps1` (Windows)
-3. Execute `pwsh ./CMF-PostgreSQL-PostCLI-Linux.ps1` (Linux)
-4. Once the execution completed, you can check the output & Logs folder.
 
 **Disclaimer:**
 These scripts are intended for use of Info Gather Assessment utility and do not interact with the user databases or gather any sensitive information (e.g passwords, PI data etc.). 
