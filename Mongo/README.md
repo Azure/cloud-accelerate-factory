@@ -2,18 +2,15 @@
 
 **OS Support**<br />
 This script is compatible with the following operating systems:<br />
+Windows 10 or later<br />
 Linux RHEL v7 or later , Ubuntu v14 or later<br />
 
 **Pre-requisites**<br />
 Execute below prior running Powershell scripts<br />
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy bypass
 
-***PowerShell***<br />
 Powershell -   https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4<br /> 
-Mongo client - https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/<br />
-
-***Bash***<br />
-Mongo Client - https://www.mongodb.com/docs/manual/administration/install-on-linux/<br />
+Mongosh client - https://www.mongodb.com/try/download/shell<br />
 
 **Note**: - Add PATH in Enviornment Variables<br />
 	
