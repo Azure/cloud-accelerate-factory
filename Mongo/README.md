@@ -1,9 +1,10 @@
 # Steps To-Do:<br />
 
-**OS Support**<br />
-This script is compatible with the following operating systems:<br />
+**Support**<br />
 Windows 10 or later<br />
 Linux RHEL v7 or later , Ubuntu v14 or later<br />
+Powershell 7.0 or later <br />
+MongoShell 2.0 or later <br />
 
 **Pre-requisites**<br />
 Execute below prior running Powershell scripts<br />
@@ -19,16 +20,22 @@ Mongosh client - https://www.mongodb.com/try/download/shell<br />
 #### curl -L -o Info-Gather-Mongo.zip https://github.com/Azure/csu-migration-factory/raw/dev/Mongo/Info-Gather-Mongo.zip
 ## Step2. Unzip Info-Gather-Mongo.zip , cd ./csu-mongo-mf-main/PUBLIC
 ## Step3. Update 'CMF_Mongo_Input_File.csv'
-"**Host_Name**","**Port**","**User_ID**","**Password**","**Auth_DB**","TLS_Certicate_Path","CA_Certificate_Path","**Approval_Status**" <br />
+"**Host_Name**","**Port**","User_ID","Password","**Auth_DB**","TLS_Certicate_Path","CA_Certificate_Path","**Approval_Status**" <br />
 
 **Note:-**<br />
 . Highlighted are **Mandatory Fields**<br />
 . Update Mandatory fields manually in CMF_Mongo_Input_File.csv <br />
-. If a **Password** is not provided, this requires interactive console input of the password for each cluster's node. 
+. If a **Password** value "**IN**" provided, this requires interactive console input of the password for each cluster's node. 
+. Update TLS and CA Certificate Path location ( e.g. windows :- C:\ca.crt , linux : /tmp/ca.crt )
 <br />
-### Execute PowerShell : `pwsh CMF-MongoDB-PowerShell.ps1`
-### Execute Bash : `./CMF-MongoDB-Bash.sh`
-      
+
+### Execute PowerShell : 
+                	pwsh
+                	bash ./CMF-MongoDB-Bash.sh
+### Execute Bash : 
+                	chmod +x ./CMF-MongoDB-Bash.sh
+			./CMF-MongoDB-Bash.sh
+
 ## Step5. Once the execution completed, you can check the Output & Logs folders.
 ## Step6. Zip the Output & Logs Folders and share to CMF Team
 
