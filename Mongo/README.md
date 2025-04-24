@@ -1,17 +1,17 @@
 # Steps To-Do:<br />
-
 **Support**<br />
-Windows 10 or later<br />
-Linux RHEL v7 or later , Ubuntu v14 or later<br />
-Powershell 7.0 or later <br />
-MongoShell 2.0 or later <br />
+- Windows 10 or later<br />
+- Linux RHEL v7 or later , Ubuntu v14 or later<br />
+- Powershell 7.x or later <br />
+- MongoShell 2.x or later <br />
 
-**Pre-requisites**<br />
-Execute below prior running Powershell scripts<br />
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy bypass
-
-Powershell -   https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4<br /> 
-Mongosh client - https://www.mongodb.com/try/download/shell<br />
+ **Pre-requisites**
+- [MongoDB Shell](https://www.mongodb.com/try/download/shell)
+- [PowerShell for windows](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5)
+- [Git for Windows](https://git-scm.com/download/win)
+- PowerShell Execution Policy for windows
+  ```powershell
+  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass
 
 **Note**: - Add PATH in Enviornment Variables<br />
 	
@@ -31,7 +31,7 @@ Mongosh client - https://www.mongodb.com/try/download/shell<br />
 
 ### Execute PowerShell : 
                 	pwsh
-                	bash ./CMF-MongoDB-Bash.sh
+                	.\CMF-MongoDB-Bash.sh
 ### Execute Bash : 
                 	chmod +x ./CMF-MongoDB-Bash.sh
 			./CMF-MongoDB-Bash.sh
