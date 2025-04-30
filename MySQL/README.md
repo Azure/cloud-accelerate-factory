@@ -34,15 +34,15 @@ MySQL Client ( e.g. /usr/bin/mysql )<br />
 1.	Download the package zip file named `MySQL-Info-Gather.zip`
 2.	Extract the `unzip MySQL-Info-Gather.zip` file.
 3.	Open the Input file `Azure_Subscription.csv` (Provide the Tenant ID & Subscription ID, add Multiple rows for Multiple Subscriptions)  
-4.	Execute `powershell.exe .\CMF-MySQL-CLI-Windows.ps1` (Windows)
-5.  Execute `pwsh ./CMF-MySQL-CLI-Linux.ps1` (Linux)
+4.	Execute `powershell.exe .\Factory-MySQL-CLI-Windows.ps1` (Windows)
+5.  Execute `pwsh ./Factory-MySQL-CLI-Linux.ps1` (Linux)
 6.	Once the execution completed, you can check the output & Logs folder.
 
     Note:- Script support Multiple Subscription within single tenant. If you have multiple Tenent, follow each steps for individual Tenant.<br />
-    For any reason if you need to re-execute "CMF-MySQL-CLI-Windows.ps1" script again...
+    For any reason if you need to re-execute "Factory-MySQL-CLI-Windows.ps1" script again...
     Rename or clear the "output" folder before each execution to prevent overwritten output.
 
-## Step2. Update CMF_MySQL_Server_Input_file.csv (For All Servers)
+## Step2. Update Factory_MySQL_Server_Input_file.csv (For All Servers)
 "**Host_Name**","Resource_Group","**Port**","VCore","Auth_Type","**User_ID**","**Password**","**DB_Name**","Tenant","Subscription_ID","**Approval_Status**","SSL_Mode"
 
 **Note:-**<br />
@@ -53,22 +53,22 @@ MySQL Client ( e.g. /usr/bin/mysql )<br />
 <br />
 
 ## Step3. MySQL Server Info Gathering (For All Servers)
-1.	Execute `powershell.exe .\CMF-MySQL-Windows.ps1` ( Windows )
-2.  Execute `pwsh ./CMF-MySQL-Linux.ps1` ( Linux )
+1.	Execute `powershell.exe .\Factory-MySQL-Windows.ps1` ( Windows )
+2.  Execute `pwsh ./Factory-MySQL-Linux.ps1` ( Linux )
 3.	Once the execution completed, you can check the output & Logs folder.
 
 ## Step4. Azure CLI Info Gathering Flexi Migration  (For Resiliency / Post Migration)
-1. Execute `powershell.exe .\CMF-MySQL-FlexiCLI-Windows.ps1` (Windows)
-2. Execute `pwsh ./CMF-MySQL-FlexiCLI-Linux.ps1` (Linux)
+1. Execute `powershell.exe .\Factory-MySQL-FlexiCLI-Windows.ps1` (Windows)
+2. Execute `pwsh ./Factory-MySQL-FlexiCLI-Linux.ps1` (Linux)
 3. Once the execution completed, you can check the Output/Flexi folder.
 
 ## Step5. Azure VM/On-premises Servers  (Only for On-Premises / Azure VM / Other Cloud Servers)
-. Refer document `CMF-ON-Prem_Server_Info_gather.docx` from the zip folder and update details and share document.<br />
+. Refer document `Factory-ON-Prem_Server_Info_gather.docx` from the zip folder and update details and share document.<br />
 
 
 id | sku.name | fullyQualifiedDomainName | sku.capacity | sku.storage | sku.tier | version | logname | region | location | ha |read_replica | environment | server_type | migration_path | approved
 
-Note:- Update CMF_MySQL_Server_List.csv file as per above format and ensure “logname” matching with "logfilename".
+Note:- Update Factory_MySQL_Server_List.csv file as per above format and ensure “logname” matching with "logfilename".
 
        sku.name = instance-type
        sku.capacity = Cores
@@ -91,7 +91,7 @@ It is important to note that these scripts should be modified with consultation 
 
 
 # Passing credentials
-Credentials handling method depends on customer requirements and relevant `CMF_MySQL_Server_Input_file.csv` input file settings
+Credentials handling method depends on customer requirements and relevant `Factory_MySQL_Server_Input_file.csv` input file settings
 
 * Default  
     * user - set `User_ID` field to user name  
@@ -108,8 +108,8 @@ Credentials handling method depends on customer requirements and relevant `CMF_M
 Incase system don't have powershell installed or user dont have permission to install on host machine executing these script
 Below batch file can be executed to gather the database level info.
 
-Step1. Create and Update CMF_MySQL_Server_Input_file.csv (For All Servers)
+Step1. Create and Update Factory_MySQL_Server_Input_file.csv (For All Servers)
 "**Host_Name**","Resource_Group","**Port**","VCore","Auth_Type","**User_ID**","**Password**","**DB_Name**","Tenant","Subscription_ID","**Approval_Status**","SSL_Mode"
 Step2. Open CMD prompt with Run as Admin  
-Step3. Execute `CMF-Mysql-Manual-Windows.bat`( Windows )
-        Execute `sh ./CMF-Mysql-Manual-Linux.txt`( Linux )
+Step3. Execute `Factory-Mysql-Manual-Windows.bat`( Windows )
+        Execute `sh ./Factory-Mysql-Manual-Linux.txt`( Linux )
