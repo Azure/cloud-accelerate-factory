@@ -33,19 +33,19 @@ PostgreSQL Client ( e.g. /usr/bin/psql )<br />
    
 ## Step1. Azure CLI Info Gathering (Only for Azure Database for PostgreSQL Single Servers)
 1. Open the Input file `Azure_Subscription.csv` (Provide the Tenant ID & Subscription ID, add Multiple rows for Multiple Subscriptions)  
-2. Execute `powershell.exe .\CMF-PostgreSQL-CLI-Windows.ps1` (Windows)
-3. Execute `pwsh ./CMF-PostgreSQL-CLI-Linux.ps1` (Linux)
+2. Execute `powershell.exe .\Factory-PostgreSQL-CLI-Windows.ps1` (Windows)
+3. Execute `pwsh ./Factory-PostgreSQL-CLI-Linux.ps1` (Linux)
 4. Once the execution completed, you can check the output & Logs folder.
 
 **Note**:- Script support Multiple Subscription within single tenant. If you have multiple Tenent, follow each steps for individual Tenant.<br />
 	
 ## Step2. AWS CLI Info Gathering (Only for AWS Servers)
 1. Open the Input file `AWS_Subscription.csv` (Provide the AWSAccessKeyID, AWSSecretAccessKey, Region, DefaultOutputFormat, SessionToken add Multiple rows)  
-2. Execute `powershell.exe .\CMF-AWS-RDS-CLI.ps1` & `powershell.exe .\CMF-AWS-VM-CLI.ps1` (Windows)
-3. Execute `pwsh ./CMF-AWS-RDS-CLI.ps1` & `pwsh ./CMF-AWS-VM-CLI.ps1` (Linux)
+2. Execute `powershell.exe .\Factory-AWS-RDS-CLI.ps1` & `powershell.exe .\Factory-AWS-VM-CLI.ps1` (Windows)
+3. Execute `pwsh ./Factory-AWS-RDS-CLI.ps1` & `pwsh ./Factory-AWS-VM-CLI.ps1` (Linux)
 4. Once the execution completed, you can check the output & Logs folder.
 
-## Step3. Update CMF_PostgreSQL_Server_Input_file.csv (For All Servers)
+## Step3. Update Factory_PostgreSQL_Server_Input_file.csv (For All Servers)
  "**Host_Name**","Resource_Group","**Port**","VCore","Auth_Type","**User_ID**","**Password**","**DB_Name**","Tenant","Subscription_ID","**Approval_Status**","**SSL_Mode**"
 
 **Note:-**<br />
@@ -54,8 +54,8 @@ PostgreSQL Client ( e.g. /usr/bin/psql )<br />
 . If a **Password** is not provided, this requires interactive console input of the password for each server. <br />
 
 ## Step4. PostgreSQL Server Info Gathering (For All Servers)
-1. Execute `powershell.exe .\CMF-PostgreSQL-Windows.ps1` ( Windows )
-2. Execute `pwsh ./CMF-PostgreSQL-Linux.ps1` ( Linux )
+1. Execute `powershell.exe .\Factory-PostgreSQL-Windows.ps1` ( Windows )
+2. Execute `pwsh ./Factory-PostgreSQL-Linux.ps1` ( Linux )
 4. Once the execution completed, you can check the output & Logs folder.
 
 **Note**:-<br /> 
@@ -65,17 +65,17 @@ PostgreSQL Client ( e.g. /usr/bin/psql )<br />
 
 ## Step5. Azure CLI Info Gathering (Only for Flexi servers Resiliency & Post-Migration)
 1. Open the Input file `Azure_Subscription.csv` (Provide the Tenant ID & Subscription ID, add Multiple rows for Multiple Subscriptions)
-2. Execute `powershell.exe .\CMF-PostgreSQL-FlexiCLI-Windows.ps1` (Windows)
-3. Execute `pwsh ./CMF-PostgreSQL-FlexiCLI-Linux.ps1` (Linux)
+2. Execute `powershell.exe .\Factory-PostgreSQL-FlexiCLI-Windows.ps1` (Windows)
+3. Execute `pwsh ./Factory-PostgreSQL-FlexiCLI-Linux.ps1` (Linux)
 4. Once the execution completed, you can check the Output/Flexi folder.
 
 ## Step6. Azure VM/On-premises Servers (Only for On-Premises / Azure VM / Other Cloud Servers)
-. Refer document `CMF-ON-Prem_Server_Info_gather.docx` from the zip folder and update details and share document.<br />
+. Refer document `Factory-ON-Prem_Server_Info_gather.docx` from the zip folder and update details and share document.<br />
 
 id | sku.name | fullyQualifiedDomainName | sku.capacity | sku.storage | sku.tier | version | logname | region | location | ha |read_replica | environment | server_type | migration_path | approved
 
 **Note**:- <br />
-Update CMF_PostgreSQL_Server_List.csv file as per above format and ensure “logname” matching with "logfilename".<br />
+Update Factory_PostgreSQL_Server_List.csv file as per above format and ensure “logname” matching with "logfilename".<br />
 sku.name = instance-type<br />
 sku.capacity = Cores<br />
 sku.storage = Memory<br />
