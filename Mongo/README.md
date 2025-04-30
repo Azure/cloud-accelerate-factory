@@ -1,41 +1,45 @@
 # Steps To-Do:<br />
+**Support**<br />
+- Windows 10 or later<br />
+- Linux RHEL v7 or later , Ubuntu v14 or later<br />
+- Powershell 7.x or later <br />
+- MongoShell 2.x or later <br />
 
-**OS Support**<br />
-This script is compatible with the following operating systems:<br />
-Windows 10 or later<br />
-Linux RHEL v7 or later , Ubuntu v14 or later<br />
-
-**Pre-requisites**<br />
-
-Execute below prior running Powershell scripts<br />
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy bypass
-
-***Windows***<br />
-Powershell -   https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4<br /> 
-Mongo client - https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/<br />
-Azure CLI (For Single Server and Microsoft Entra ID authentication only) - https://aka.ms/installazurecliwindows )<br /> 
-
-***Linux***<br />
-Powershell - https://learn.microsoft.com/en-us/powershell/scripting/install/install-rhel?view=powershell-7.4<br /> 
-Mongo Client - https://www.mongodb.com/docs/manual/administration/install-on-linux/<br />
-Azure CLI (For Single Server and Microsoft Entra ID) - https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux/<br /> 
+ **Pre-requisites**
+- [MongoDB Shell](https://www.mongodb.com/try/download/shell)
+- [PowerShell for windows](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5)
+- [Git for Windows](https://git-scm.com/download/win)
+- PowerShell Execution Policy for windows
+  ```powershell
+  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass
 
 **Note**: - Add PATH in Enviornment Variables<br />
 	
-
-## Step1. Download and run the infogather script
-## Step2. Download the script from the git link https://github.com/customer-success-microsoft/csu-mongo-mf/tree/dev/PUBLIC
-## Step3. Update 'CMF_Mongo_Input_File.csv'
-"**Host_Name**","**Port**","**User_ID**","**Password**","**JSON_Output**","TLS_Certicate_Path","CA_Certificate_Path","**Approval_Status**"
+## Step1. Download the script 
+#### GIT Repo: https://github.com/Azure/csu-migration-factory/blob/dev/Mongo
+#### curl -L -o Info-Gather-Mongo.zip https://github.com/Azure/csu-migration-factory/raw/dev/Mongo/Info-Gather-Mongo.zip
+## Step2. Unzip Info-Gather-Mongo.zip , cd ./csu-mongo-mf-main/PUBLIC
+## Step3. Update 'Factory_Mongo_Input_File.csv'
+"**Host_Name**","**Port**","User_ID","Password","**Auth_DB**","TLS_Certicate_Path","CA_Certificate_Path","**Approval_Status**" <br />
 
 **Note:-**<br />
 . Highlighted are **Mandatory Fields**<br />
-. Update Mandatory fields manually in case of Azure VM / On-premises Servers <br />
-. If a **Password** is not provided, this requires interactive console input of the password for each server. 
-. For credentials handling methods refer to [Passing credentials](#passing-credentials)
+. Update Mandatory fields manually in Factory_Mongo_Input_File.csv <br />
+. If a **Password** value "**IN**" provided, this requires interactive console input of the password for each cluster's node. 
+. Update TLS and CA Certificate Path location ( e.g. windows :- C:\ca.crt , linux : /tmp/ca.crt )
 <br />
-## Step4. Execute `pwsh CMF-MongoDB-Linux.ps1`
-## Step5. Once the execution completed, you can check the output & Logs folder.
-## Step6. Zip the Output Folder and share to CMF Team
 
-       
+### Execute PowerShell : 
+                	pwsh
+                	.\Factory-MongoDB-Bash.sh
+### Execute Bash : 
+                	chmod +x ./Factory-MongoDB-Bash.sh
+			./Factory-MongoDB-Bash.sh
+
+## Step5. Once the execution completed, you can check the Output & Logs folders.
+## Step6. Zip the Output & Logs Folders and share to Factory Team
+
+### Description
+https://github.com/mongodb/support-tools/tree/master/getMongoData 
+
+Disclaimer: These scripts are intended for use of Info Gather Assessment utility and do not interact with the user databases or gather any sensitive information (e.g passwords, PI data etc.). These scripts are provided as-is to merely capture metadata information ONLY. While every effort has been made to ensure that accuracy and reliability of the scripts, it is recommended to review and test them in a non-production environment before deploying them in a production environment. It is important to note that these scripts should be modified with consultation.

@@ -31,18 +31,18 @@ Azure CLI  ( e.g. /usr/bin/az )<br />
 MariaDB Client ( e.g. /usr/bin/mysql )<br />
 
 ## Step1. Azure CLI Info Gathering (Only for Azure Database for MariaDB Single Servers)
-1.	Download the package zip file named `Info-Gather-MariaDB.zip`
-2.	Extract the `unzip Info-Gather-MariaDB.zip` file.
+1.	Download the package zip file named `MariaDB-Info-Gather.zip`
+2.	Extract the `unzip MariaDB-Info-Gather.zip` file.
 3.	Open the Input file `Azure_Subscription.csv` (Provide the Tenant ID & Subscription ID, add Multiple rows for Multiple Subscriptions)  
-4.	Execute `powershell.exe .\CMF-MariaDB-CLI-Windows.ps1` (Windows)
-5.  Execute `pwsh ./CMF-MariaDB-CLI-Linux.ps1` (Linux)
+4.	Execute `powershell.exe .\Factory-MariaDB-CLI-Windows.ps1` (Windows)
+5.  Execute `pwsh ./Factory-MariaDB-CLI-Linux.ps1` (Linux)
 6.	Once the execution completed, you can check the output & Logs folder.
 
     Note:- Script support Multiple Subscription within single tenant. If you have multiple Tenent, follow each steps for individual Tenant.<br />
-    For any reason if you need to re-execute "CMF-MariaDB-CLI-Windows.ps1" script again...
+    For any reason if you need to re-execute "Factory-MariaDB-CLI-Windows.ps1" script again...
     Rename or clear the "output" folder before each execution to prevent overwritten output.
 
-## Step2. Update CMF_MariaDB_Server_Input_file.csv (For All Servers)
+## Step2. Update Factory_MariaDB_Server_Input_file.csv (For All Servers)
 "**Host_Name**","Resource_Group","**Port**","VCore","Auth_Type","**User_ID**","**Password**","**DB_Name**","Tenant","Subscription_ID","**Approval_Status**","SSL_Mode"
 
 **Note:-**<br />
@@ -53,12 +53,12 @@ MariaDB Client ( e.g. /usr/bin/mysql )<br />
 <br />
 
 ## Step3. MariaDB Server Info Gathering (For All Servers)
-1.	Execute `powershell.exe .\CMF-MariaDB-Windows.ps1` ( Windows )
-2.  Execute `pwsh ./CMF-MariaDB-Linux.ps1` ( Linux )
+1.	Execute `powershell.exe .\Factory-MariaDB-Windows.ps1` ( Windows )
+2.  Execute `pwsh ./Factory-MariaDB-Linux.ps1` ( Linux )
 3.	Once the execution completed, you can check the output & Logs folder.
 
 ## Step4. Azure VM/On-premises Servers  (Only for On-Premises / Azure VM / Other Cloud Servers)
-. Refer document `CMF-ON-Prem_Server_Info_gather.docx` from the zip folder and update details and share document.<br />
+. Refer document `Factory-ON-Prem_Server_Info_gather.docx` from the zip folder and update details and share document.<br />
 
 Host-Name  | Cores | Memory | Storage Size | Storage Type | OS type | OS version | IOPS 
 
@@ -75,7 +75,7 @@ It is important to note that these scripts should be modified with consultation 
 
 
 # Passing credentials
-Credentials handling method depends on customer requirements and relevant `CMF_MariaDB_Server_Input_file.csv` input file settings
+Credentials handling method depends on customer requirements and relevant `Factory_MariaDB_Server_Input_file.csv` input file settings
 
 * Default  
     * user - set `User_ID` field to user name  
@@ -92,8 +92,8 @@ Credentials handling method depends on customer requirements and relevant `CMF_M
 Incase system don't have powershell installed or user dont have permission to install on host machine executing these script
 Below batch file can be executed to gather the database level info.
 
-Step1. Create and Update CMF_MariaDB_Server_Input_file.csv (For All Servers)
+Step1. Create and Update Factory_MariaDB_Server_Input_file.csv (For All Servers)
 "**Host_Name**","Resource_Group","**Port**","VCore","Auth_Type","**User_ID**","**Password**","**DB_Name**","Tenant","Subscription_ID","**Approval_Status**","SSL_Mode"
 Step2. Open CMD prompt with Run as Admin  
-Step3. Execute `CMF-MariaDB-Manual-Windows.bat`( Windows )
-        Execute `sh ./CMF-MariaDB-Manual-Linux.sh`( Linux )
+Step3. Execute `Factory-MariaDB-Manual-Windows.bat`( Windows )
+        Execute `sh ./Factory-MariaDB-Manual-Linux.sh`( Linux )
