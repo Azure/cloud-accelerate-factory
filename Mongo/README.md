@@ -50,21 +50,30 @@ This scripts for gathering information about how a running
 MongoDB deployment has been configured and for gathering statistics about its
 databases, collections, indexes, and shards.
 
-#### Usage
+### Usage
+#### MongoDB on On-Prem
 To execute on a locally-running `mongod` or `mongos` on the default port
 
-    mongosh mongodb://HOST:PORT  -u ADMIN_USER -p ADMIN_PASSWORD --eval "var _printJSON=false;" **getMongoData.js** > ./Cluster_HOST_PORT_mm_dd_yyyy_hh_mm_ss.log
-    mongosh mongodb://HOST:PORT  -u ADMIN_USER -p ADMIN_PASSWORD --eval "var _printJSON=false;" **CheckMongoDB.js** > ./Database_HOST_PORT_mm_dd_yyyy_hh_mm_ss.log
-    mongosh mongodb://HOST:PORT  -u ADMIN_USER -p ADMIN_PASSWORD --eval "var _printJSON=false;" **Checksize.js** > ./DBSize_HOST_PORT_mm_dd_yyyy_hh_mm_ss.log
+    mongosh mongodb://HOST:PORT  -u ADMIN_USER -p ADMIN_PASSWORD --eval "var _printJSON=false;" getMongoData.js > ./Cluster_HOST_mm_dd_yyyy_hh_mm_ss.log
+    mongosh mongodb://HOST:PORT  -u ADMIN_USER -p ADMIN_PASSWORD --eval "var _printJSON=false;" CheckMongoDB.js > ./Database_HOST_mm_dd_yyyy_hh_mm_ss.log
+    mongosh mongodb://HOST:PORT  -u ADMIN_USER -p ADMIN_PASSWORD --eval "var _printJSON=false;" Checksize.js > ./DBSize_HOST_mm_dd_yyyy_hh_mm_ss.log
 
 Reference :- https://github.com/mongodb/support-tools/tree/master/getMongoData 
+
+#### MongoDB on Kubernetes
+To execute Scripts on Mongodb running on Kubernetes use below commands,
+
+	kubectl exec -it -n <namespace> <pod-name> -- mongosh -u ADMIN_USER -p ADMIN_PASSWORD > ./Cluster_HOST_mm_dd_yyyy_hh_mm_ss.log < getMongoData.js
+	kubectl exec -it -n <namespace> <pod-name> -- mongosh -u ADMIN_USER -p ADMIN_PASSWORD > ./Database_HOST_mm_dd_yyyy_hh_mm_ss.log < CheckMongoDB.js
+	kubectl exec -it -n <namespace> <pod-name> -- mongosh -u ADMIN_USER -p ADMIN_PASSWORD > ./DBSize_HOST_mm_dd_yyyy_hh_mm_ss.log < Checksize.js
+    kubectl get pvc -n <namespace> > ./PVC_HOST_mm_dd_yyyy_hh_mm_ss.log
 
 ### . Post Migration Validation 
 This process uses two JavaScript scripts executed via mongosh on a MongoDB server to:
 Count documents in collections (excluding system DBs), Fetch the database size on disk. Log the results to .log files for validation or reporting.
 
-    mongosh mongodb://HOST:PORT  -u ADMIN_USER -p ADMIN_PASSWORD PostvalidationCount.js > ./CollCount_HOST_PORT_mm_dd_yyyy_hh_mm_ss.log
-    mongosh mongodb://HOST:PORT  -u ADMIN_USER -p ADMIN_PASSWORD PostvalidationDbsize.js > ./TotDBSize_HOST_PORT_mm_dd_yyyy_hh_mm_ss.log
+    mongosh mongodb://HOST:PORT  -u ADMIN_USER -p ADMIN_PASSWORD PostvalidationCount.js > ./CollCount_HOST_mm_dd_yyyy_hh_mm_ss.log
+    mongosh mongodb://HOST:PORT  -u ADMIN_USER -p ADMIN_PASSWORD PostvalidationDbsize.js > ./TotDBSize_HOST_mm_dd_yyyy_hh_mm_ss.log
 
 Note:- Compare the source and target files to see the diff if any.
 
@@ -123,3 +132,7 @@ Perform a partial dump and partial restore using a collections.txt file that lis
 	        **Note:-** Compare the source and target files to see the diff if any.
 
 **Disclaimer:** These scripts are intended for use of Info Gather Assessment utility and do not interact with the user databases or gather any sensitive information (e.g passwords, PI data etc.). These scripts are provided as-is to merely capture metadata information ONLY. While every effort has been made to ensure that accuracy and reliability of the scripts, it is recommended to review and test them in a non-production environment before deploying them in a production environment. It is important to note that these scripts should be modified with consultation.
+
+
+
+
