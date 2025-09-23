@@ -1,115 +1,328 @@
-# Steps To-Do:<br />
+<!--=========================README TEMPLATE INSTRUCTIONS=============================
+======================================================================================
 
-**OS Support**<br />
-This script is compatible with the following operating systems:<br />
-Windows 10 or later<br />
-Linux RHEL v7 or later , Ubuntu v14 or later<br />
+- THIS README TEMPLATE LARGELY CONSISTS OF COMMENTED OUT TEXT. THIS UNRENDERED TEXT IS MEANT TO BE LEFT IN AS A GUIDE 
+  THROUGHOUT THE REPOSITORY'S LIFE WHILE END USERS ONLY SEE THE RENDERED PAGE CONTENT. 
+- Any italicized text rendered in the initial template is intended to be replaced IMMEDIATELY upon repository creation.
 
-**Pre-requisites**<br />
+- This template is default but not mandatory. It was designed to compensate for typical gaps in Microsoft READMEs 
+  that slow the pace of work. You may delete it if you have a fully populated README to replace it with.
 
-Execute below prior running Powershell scripts<br />
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy bypass
-
-***Windows***<br />
-Powershell -   https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4<br /> 
-MySQL Client - https://dev.mysql.com/downloads/installer/<br />
-Azure CLI (For Single Server and Microsoft Entra ID authentication only) - https://aka.ms/installazurecliwindows )<br /> 
-
-***Linux***<br />
-Powershell - https://learn.microsoft.com/en-us/powershell/scripting/install/install-rhel?view=powershell-7.4<br /> 
-MySQL Client - https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install-linux-quick.html<br />
-Azure CLI (For Single Server and Microsoft Entra ID) - https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux/<br /> 
-
-**Note**: - Add PATH in Enviornment Variables<br />
-
-***Windows***<br />
-Azure CLI  ( e.g. C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin )<br />
-MySQL Client ( e.g. C:\Program Files\MySQL\bin )<br />
-
-***Linux***<br />
-Azure CLI  ( e.g. /usr/bin/az )<br />
-MySQL Client ( e.g. /usr/bin/mysql )<br />
-
-## Step1. Azure CLI Info Gathering (Only for Azure Database for MySQL Single Servers)
-1.	Download the package zip file named `MySQL-Info-Gather.zip`
-2.	Extract the `unzip MySQL-Info-Gather.zip` file.
-3.	Open the Input file `Azure_Subscription.csv` (Provide the Tenant ID & Subscription ID, add Multiple rows for Multiple Subscriptions)  
-4.	Execute `powershell.exe .\Factory-MySQL-CLI-Windows.ps1` (Windows)
-5.  Execute `pwsh ./Factory-MySQL-CLI-Linux.ps1` (Linux)
-6.	Once the execution completed, you can check the output & Logs folder.
-
-    Note:- Script support Multiple Subscription within single tenant. If you have multiple Tenent, follow each steps for individual Tenant.<br />
-    For any reason if you need to re-execute "Factory-MySQL-CLI-Windows.ps1" script again...
-    Rename or clear the "output" folder before each execution to prevent overwritten output.
-
-## Step2. Update Factory_MySQL_Server_Input_file.csv (For All Servers)
-"**Host_Name**","Resource_Group","**Port**","VCore","Auth_Type","**User_ID**","**Password**","**DB_Name**","Tenant","Subscription_ID","**Approval_Status**","SSL_Mode"
-
-**Note:-**<br />
-. Highlighted are **Mandatory Fields**<br />
-. Update Mandatory fields manually in case of Azure VM / On-premises Servers <br />
-. If a **Password** is not provided, this requires interactive console input of the password for each server. 
-. For credentials handling methods refer to [Passing credentials](#passing-credentials)
-<br />
-
-## Step3. MySQL Server Info Gathering (For All Servers)
-1.	Execute `powershell.exe .\Factory-MySQL-Windows.ps1` ( Windows )
-2.  Execute `pwsh ./Factory-MySQL-Linux.ps1` ( Linux )
-3.	Once the execution completed, you can check the output & Logs folder.
-
-## Step4. Azure CLI Info Gathering Flexi Migration  (For Resiliency / Post Migration)
-1. Execute `powershell.exe .\Factory-MySQL-FlexiCLI-Windows.ps1` (Windows)
-2. Execute `pwsh ./Factory-MySQL-FlexiCLI-Linux.ps1` (Linux)
-3. Once the execution completed, you can check the Output/Flexi folder.
-
-## Step5. Azure VM/On-premises Servers  (Only for On-Premises / Azure VM / Other Cloud Servers)
-. Refer document `Factory-ON-Prem_Server_Info_gather.docx` from the zip folder and update details and share document.<br />
-
-
-id | sku.name | fullyQualifiedDomainName | sku.capacity | sku.storage | sku.tier | version | logname | region | location | ha |read_replica | environment | server_type | migration_path | approved
-
-Note:- Update Factory_MySQL_Server_List.csv file as per above format and ensure “logname” matching with "logfilename".
-
-       sku.name = instance-type
-       sku.capacity = Cores
-       sku.storage = Memory
-       logname = logfilename 
-       sku.tier = AWS_RDS_GeneralPurpose, AWS_RDS_MemoryOptimized, AWS_Aurora_GeneralPurpose, AWS_Aurora_MemoryOptimized, GCP_CloudSQL_Enterprise, Azure_VM, GCP_VM, AWS_VM, Onprem_VM, K8s_Cluster_Node
+- Most README sections below are commented out as they are not known early in a repository's life. Others are commented 
+  out as they do not apply to every repository. If a section will be appropriate later but not known now, consider 
+  leaving it in commented out and adding an issue as a reminder.
+- There are additional optional README sections in the external instruction link below. These include; "citation",  
+  "built with", "acknowledgments", "folder structure", etc.
+- You can easily find the places to add content that will be rendered to the end user by searching 
+within the file for "TODO".
 
 
 
-## Step6. Zip and share output, log folders (For All Servers) 
-Kindly follow the execution instructions mentioned in attached documents. 
-If there is/are any queries, please let us know, we will connect and check.
+- ADDITIONAL EXTERNAL TEMPLATE INSTRUCTIONS:
+  -  https://aka.ms/StartRight/README-Template/Instructions
+
+======================================================================================
+====================================================================================-->
 
 
-**Disclaimer:**
-These scripts are intended for use of Info Gather Assessment utility and do not interact with the user databases or gather any sensitive information (e.g passwords, PI data etc.). 
-These scripts are provided as-is to merely capture metadata information ONLY. While every effort has been made to ensure that accuracy and reliability of the scripts, 
-it is recommended to review and test them in a non-production environment before deploying them in a production environment.
-It is important to note that these scripts should be modified with consultation of Microsoft.
+<!---------------------[  Description  ]------------------<recommended> section below------------------>
+
+# csu-mysql-mf
+
+<!-- 
+INSTRUCTIONS:
+- Write description paragraph(s) that can stand alone. Remember 1st paragraph may be consumed by aggregators to improve 
+  search experience.
+- You description should allow any reader to figure out:
+    1. What it does?
+    2. Why was it was created?
+    3. Who created?
+    4. What is it's maturity?
+    5. What is the larger context?
+- Write for a reasonable person with zero context regarding your product, org, and team. The person may be evaluating if 
+this is something they can use.
+
+How to Evaluate & Examples: 
+  - https://aka.ms/StartRight/README-Template/Instructions#description
+-->
+
+Repository for creating and storing code and scripts for CSU Migration Factory for MySQL
+
+-----------------------------------------------------------------
+<!-----------------------[  License  ]----------------------<optional> section below--------------------->
+
+<!-- 
+## License 
+--> 
+
+<!-- 
+INSTRUCTIONS:
+- Licensing is mostly irrelevant within the company for purely internal code. Use this section to prevent potential 
+  confusion around:
+  - Open source in internal code repository.
+  - Multiple licensed code in same repository. 
+  - Internal fork of public open source code.
+
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#license
+-->
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+
+<!------====-- CONTENT GOES ABOVE ------->
 
 
-# Passing credentials
-Credentials handling method depends on customer requirements and relevant `Factory_MySQL_Server_Input_file.csv` input file settings
 
-* Default  
-    * user - set `User_ID` field to user name  
-    * password - leave  `Password` field empty for interactive password prompt during scrpt execution 
-* Unattended
-    * user - set `User_ID` field to user name  
-    * password - set `Password` field to the user password
-* Microsoft Entra ID 
-    * user - set `User_ID` field to user name  (this has to be interactive user because script can get an access token for the current account only)
-    * password - leave  `Password` field empty 
-    * authentication type - set `Auth_Type` to `entraid` value
+<!-----------------------[  Getting Started  ]--------------<recommended> section below------------------>
+## Getting Started
 
-# Appendix - Manual script execution
-Incase system don't have powershell installed or user dont have permission to install on host machine executing these script
-Below batch file can be executed to gather the database level info.
+<!-- 
+INSTRUCTIONS:
+  - Write instructions such that any new user can get the project up & running on their machine.
+  - This section has subsections described further down of "Prerequisites", "Installing", and "Deployment". 
 
-Step1. Create and Update Factory_MySQL_Server_Input_file.csv (For All Servers)
-"**Host_Name**","Resource_Group","**Port**","VCore","Auth_Type","**User_ID**","**Password**","**DB_Name**","Tenant","Subscription_ID","**Approval_Status**","SSL_Mode"
-Step2. Open CMD prompt with Run as Admin  
-Step3. Execute `Factory-Mysql-Manual-Windows.bat`( Windows )
-        Execute `sh ./Factory-Mysql-Manual-Linux.txt`( Linux )
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#getting-started
+-->
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+*Description of how to install and use the code or content goes here*
+<!------====-- CONTENT GOES ABOVE ------->
+
+
+<!-----------------------[ Prerequisites  ]-----------------<optional> section below--------------------->
+### Prerequisites
+
+<!--------------------------------------------------------
+INSTRUCTIONS:
+- Describe what things a new user needs to install in order to install and use the repository. 
+
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#prerequisites
+---------------------------------------------------------->
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+There are no prerequisites required to run this code or use this repository.
+<!------====-- CONTENT GOES ABOVE ------->
+
+
+<!-----------------------[  Installing  ]-------------------<optional> section below------------------>
+### Installing
+
+<!--
+INSTRUCTIONS:
+- A step by step series of examples that tell you how to get a development environment and your code running. 
+- Best practice is to include examples that can be copy and pasted directly from the README into a terminal.
+
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#installing
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+This repository does not hold installable content.
+<!------====-- CONTENT GOES ABOVE ------->
+
+
+<!-----------------------[  Tests  ]------------------------<optional> section below--------------------->
+<!-- 
+## Tests
+ -->
+
+<!--
+INSTRUCTIONS:
+- Explain how to run the tests for this project. You may want to link here from Deployment (CI/CD) or Contributing sections.
+
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#tests
+-->
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+<!--
+
+*Explain what these tests test and why* 
+
+```
+Give an example
+``` 
+
+-->
+<!------====-- CONTENT GOES ABOVE ------->
+
+
+<!-----------------------[  Deployment (CI/CD)  ]-----------<optional> section below--------------------->
+### Deployment (CI/CD)
+
+<!-- 
+INSTRUCTIONS:
+- Describe how to deploy if applicable. Deployment includes website deployment, packages, or artifacts.
+- Avoid potential new contributor frustrations by making it easy to know about all compliance and continuous integration 
+    that will be run before pull request approval.
+- NOTE: Setting up an Azure DevOps pipeline gets you all 1ES compliance and build tooling such as component governance. 
+  - More info: https://aka.ms/StartRight/README-Template/integrate-ado
+
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#deployment-and-continuous-integration
+-->
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+_At this time, the repository does not use continuous integration or produce a website, artifact, or anything deployed._
+<!------====-- CONTENT GOES ABOVE ------->
+
+
+<!-----------------------[  Versioning and Changelog  ]-----<optional> section below--------------------->
+
+<!-- ### Versioning and Changelog -->
+
+<!-- 
+INSTRUCTIONS:
+- If there is any information on a changelog, history, versioning style, roadmap or any related content tied to the 
+  history and/or future of your project, this is a section for it.
+
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#versioning-and-changelog
+-->
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+<!-- We use [SemVer](https://aka.ms/StartRight/README-Template/semver) for versioning. -->
+<!------====-- CONTENT GOES ABOVE ------->
+
+
+-----------------------------------------------
+
+<!-----------------------[  Access  ]-----------------------<recommended> section below------------------>
+## Access
+
+<!-- 
+INSTRUCTIONS:
+- Please use this section to reduce the all-too-common friction & pain of getting read access and role-based permissions 
+  to repos inside Microsoft. Please cover (a) Gaining a role with read, write, other permissions. (b) sharing a link to 
+  this repository such that people who are not members of the organization can access it.
+- If the repository is set to internalVisibility, you may also want to refer to the "Sharing a Link to this Repository" sub-section 
+of the [README-Template instructions](https://aka.ms/StartRight/README-Template/Instructions#sharing-a-link-to-this-repository) so new GitHub EMU users know to get 1ES-Enterprise-Visibility MyAccess group access and therefore will have read rights to any repo set to internalVisibility.
+
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#how-to-share-an-accessible-link-to-this-repository
+-->
+
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+
+<!------====-- CONTENT GOES ABOVE ------->
+
+
+<!-----------------------[  Contributing  ]-----------------<recommended> section below------------------>
+## Contributing
+
+<!--
+INSTRUCTIONS: 
+- Establish expectations and processes for existing & new developers to contribute to the repository.
+  - Describe whether first step should be email, teams message, issue, or direct to pull request.
+  - Express whether fork or branch preferred.
+- CONTRIBUTING content Location:
+  - You can tell users how to contribute in the README directly or link to a separate CONTRIBUTING.md file.
+  - The README sections "Contacts" and "Reuse Expectations" can be seen as subsections to CONTRIBUTING.
+  
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#contributing
+-->
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+_This repository prefers outside contributors start forks rather than branches. For pull requests more complicated 
+than typos, it is often best to submit an issue first._
+
+If you are a new potential collaborator who finds reaching out or contributing to another project awkward, you may find 
+it useful to read these [tips & tricks](https://aka.ms/StartRight/README-Template/innerSource/2021_02_TipsAndTricksForCollaboration) 
+on InnerSource Communication.
+<!------====-- CONTENT GOES ABOVE ------->
+
+
+<!-----------------------[  Contacts  ]---------------------<recommended> section below------------------>
+<!-- 
+#### Contacts  
+-->
+<!--
+INSTRUCTIONS: 
+- To lower friction for new users and contributors, provide a preferred contact(s) and method (email, TEAMS, issue, etc.)
+
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#contacts
+-->
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+
+<!------====-- CONTENT GOES ABOVE ------->
+
+
+<!-----------------------[  Support & Reuse Expectations  ]-----<recommended> section below-------------->
+ 
+### Support & Reuse Expectations
+
+ 
+<!-- 
+INSTRUCTIONS:
+- To avoid misalignments use this section to set expectations in regards to current and future state of:
+  - The level of support the owning team provides new users/contributors and 
+  - The owning team's expectations in terms of incoming InnerSource requests and contributions.
+
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#support-and-reuse-expectations
+-->
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+
+_The creators of this repository **DO NOT EXPECT REUSE**._
+
+If you do use it, please let us know via an email or 
+leave a note in an issue, so we can best understand the value of this repository.
+<!------====-- CONTENT GOES ABOVE ------->
+
+
+<!-----------------------[  Limitations  ]----------------------<optional> section below----------------->
+
+<!-- 
+### Limitations 
+--> 
+
+<!-- 
+INSTRUCTIONS:
+- Use this section to make readers aware of any complications or limitations that they need to be made aware of.
+  - State:
+    - Export restrictions
+    - If telemetry is collected
+    - Dependencies with non-typical license requirements or limitations that need to not be missed. 
+    - trademark limitations
+ 
+How to Evaluate & Examples:
+  - https://aka.ms/StartRight/README-Template/Instructions#limitations
+-->
+
+<!---- [TODO]  CONTENT GOES BELOW ------->
+
+<!------====-- CONTENT GOES ABOVE ------->
+
+--------------------------------------------
+
+
+<!-----------------------[  Links to Platform Policies  ]-------<recommended> section below-------------->
+## How to Accomplish Common User Actions
+<!-- 
+INSTRUCTIONS: 
+- This section links to information useful to any user of this repository new to internal GitHub policies & workflows.
+-->
+
+ If you have trouble doing something related to this repository, please keep in mind that the following actions require 
+ using [GitHub inside Microsoft (GiM) tooling](https://aka.ms/gim/docs) and not the normal GitHub visible user interface!
+- [Switching between EMU GitHub and normal GitHub without logging out and back in constantly](https://aka.ms/StartRight/README-Template/maintainingMultipleAccount)
+- [Creating a repository](https://aka.ms/StartRight)
+- [Changing repository visibility](https://aka.ms/StartRight/README-Template/policies/jit) 
+- [Gaining repository permissions, access, and roles](https://aka.ms/StartRight/README-TEmplates/gim/policies/access)
+- [Enabling easy access to your low sensitivity and widely applicable repository by setting it to Internal Visibility and having any FTE who wants to see it join the 1ES Enterprise Visibility MyAccess Group](https://aka.ms/StartRight/README-Template/gim/innersource-access)
+- [Migrating repositories](https://aka.ms/StartRight/README-Template/troubleshoot/migration)
+- [Setting branch protection](https://aka.ms/StartRight/README-Template/gim/policies/branch-protection)
+- [Setting up GitHubActions](https://aka.ms/StartRight/README-Template/policies/actions)
+- [and other actions](https://aka.ms/StartRight/README-Template/gim/policies)
+
+This README started as a template provided as part of the 
+[StartRight](https://aka.ms/gim/docs/startright) tool that is used to create new repositories safely. Feedback on the
+[README template](https://aka.ms/StartRight/README-Template) used in this repository is requested as an issue. 
+
+<!-- version: 2023-04-07 [Do not delete this line, it is used for analytics that drive template improvements] -->
