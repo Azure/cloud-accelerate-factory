@@ -1,35 +1,51 @@
-# Project
 
-Cloud Accelerate Factory
+<!---------------------[  Description  ]------------------<recommended> section below------------------>
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+# csu-cassandra-mf
 
-As the maintainer of this project, please make a few updates:
+Steps To-Do:
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+Support
 
-## Contributing
+Windows 10 or later
+Linux RHEL v7 or later , Ubuntu v14 or later
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+<!-----------------------[ Prerequisites  ]-----------------<optional> section below--------------------->
+### Prerequisites
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+Git for Windows
+PowerShell Execution Policy for windows
 
-## Trademarks
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass
+Note: - Add PATH in Enviornment Variables
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+
+
+<!-----------------------[  Installing  ]-------------------<optional> section below------------------>
+### Installing
+
+Step1. Download the script
+GIT Repo: https://github.com/Azure/cloud-accelerate-factory/tree/dev/Cassandra
+
+Step2. Unzip Info-Gather-cassandra.zip , cd ./csu-cassandra-mf/PUBLIC
+
+Step3. Update 'infogatherfile.sh'
+
+cassandrapath=""
+password=""
+logfile=""
+
+Note:-
+. Highlighted are Mandatory Fields
+. Update the mentioned parameters manually in infogatherfile.sh
+
+
+Execute Bash :
+            	chmod +x ./infogatherfile.sh
+			 
+		         sh infogatherfile.sh
+		   
+Step4. Once the execution completed, you can check the Output file in the path you have provided for logfile parameter.
+
+Step5. Share that log file to Factory Team

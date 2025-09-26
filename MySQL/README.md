@@ -42,17 +42,27 @@ MySQL Client ( e.g. /usr/bin/mysql )<br />
     For any reason if you need to re-execute "Factory-MySQL-CLI-Windows.ps1" script again...
     Rename or clear the "output" folder before each execution to prevent overwritten output.
 
-## Step2. Update Factory_MySQL_Server_Input_file.csv (For All Servers)
+## Step2. AWS CLI Info Gathering (Only for AWS Servers)
+1. Open the Input file `AWS_Subscription.csv` (Provide the AWSAccessKeyID, AWSSecretAccessKey, Region, DefaultOutputFormat, SessionToken add Multiple rows)  
+2. Execute `powershell.exe .\Factory-AWS-RDS-CLI.ps1` & `powershell.exe .\Factory-AWS-VM-CLI.ps1` (Windows)
+3. Execute `pwsh ./Factory-AWS-RDS-CLI.ps1` & `pwsh ./Factory-AWS-VM-CLI.ps1` (Linux)
+4. Once the execution completed, you can check the output & Logs folder.
+5. Copy the **"RDS_Instance_Metadata.csv"** from the output folder into the PUBLIC folder, and rename to **"Factory_MySQL_Server_Input_file.csv"**<br />
+6. Execute cp ./Output/RDS_Instance_Metadata.csv . **(Copy)** & mv ./RDS_Instance_Metadata.csv Factory_MySQL_Server_Input_file.csv **(Rename)** (Linux)<br />
+7. Execute copy .\Output\RDS_Instance_Metadata.csv . **(Copy)** & rename .\RDS_Instance_Metadata.csv Factory_MySQL_Server_Input_file.csv **(Rename)** <br />
+
+## Step3. Update Factory_MySQL_Server_Input_file.csv (For All Servers)
 "**Host_Name**","Resource_Group","**Port**","VCore","Auth_Type","**User_ID**","**Password**","**DB_Name**","Tenant","Subscription_ID","**Approval_Status**","SSL_Mode"
 
 **Note:-**<br />
 . Highlighted are **Mandatory Fields**<br />
+. **Approval_Status** column should be **Yes** for the execution <br />
 . Update Mandatory fields manually in case of Azure VM / On-premises Servers <br />
 . If a **Password** is not provided, this requires interactive console input of the password for each server. 
 . For credentials handling methods refer to [Passing credentials](#passing-credentials)
 <br />
 
-## Step3. MySQL Server Info Gathering (For All Servers)
+## Step4. MySQL Server Info Gathering (For All Servers)
 1.	Execute `powershell.exe .\Factory-MySQL-Windows.ps1` ( Windows )
 2.  Execute `pwsh ./Factory-MySQL-Linux.ps1` ( Linux )
 3.	Once the execution completed, you can check the output & Logs folder.
