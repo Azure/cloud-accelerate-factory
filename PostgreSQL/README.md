@@ -44,12 +44,16 @@ PostgreSQL Client ( e.g. /usr/bin/psql )<br />
 2. Execute `powershell.exe .\Factory-AWS-RDS-CLI.ps1` & `powershell.exe .\Factory-AWS-VM-CLI.ps1` (Windows)
 3. Execute `pwsh ./Factory-AWS-RDS-CLI.ps1` & `pwsh ./Factory-AWS-VM-CLI.ps1` (Linux)
 4. Once the execution completed, you can check the output & Logs folder.
+5. Copy the **"RDS_Instance_Metadata.csv"** from the output folder into the PUBLIC folder, and rename to **"Factory_PostgreSQL_Server_Input_file.csv"**<br />
+6. Execute cp ./Output/RDS_Instance_Metadata.csv . **(Copy)** & mv ./RDS_Instance_Metadata.csv Factory_PostgreSQL_Server_Input_file.csv **(Rename)** (Linux)<br />
+7. Execute copy .\Output\RDS_Instance_Metadata.csv . **(Copy)** & rename .\RDS_Instance_Metadata.csv Factory_PostgreSQL_Server_Input_file.csv **(Rename)** <br />
 
 ## Step3. Update Factory_PostgreSQL_Server_Input_file.csv (For All Servers)
  "**Host_Name**","Resource_Group","**Port**","VCore","Auth_Type","**User_ID**","**Password**","**DB_Name**","Tenant","Subscription_ID","**Approval_Status**","**SSL_Mode**"
 
 **Note:-**<br />
 . Highlighted are **Mandatory Fields**<br />
+. **Approval_Status** column should be **Yes** for the execution <br />
 . Update Mandatory fields manually in case of Azure VM / On-premises / Other Cloud Servers <br />
 . If a **Password** is not provided, this requires interactive console input of the password for each server. <br />
 
