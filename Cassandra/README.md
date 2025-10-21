@@ -5,20 +5,14 @@
 
 Steps To-Do:
 
-Support
+### Support
 
-Windows 10 or later
 Linux RHEL v7 or later , Ubuntu v14 or later
 
 
 <!-----------------------[ Prerequisites  ]-----------------<optional> section below--------------------->
 ### Prerequisites
 
-Git for Windows
-PowerShell Execution Policy for windows
-
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass
-Note: - Add PATH in Enviornment Variables
 
 
 
@@ -26,15 +20,21 @@ Note: - Add PATH in Enviornment Variables
 ### Installing
 
 Step1. Download the script
-GIT Repo: https://github.com/Azure/cloud-accelerate-factory/tree/dev/Cassandra
+GIT Repo:  https://github.com/Azure/cloud-accelerate-factory/blob/dev/Cassandra/Info-Gather-Cassandra.zip
 
 Step2. Unzip Info-Gather-cassandra.zip , cd ./csu-cassandra-mf/PUBLIC
 
-Step3. Update 'infogatherfile.sh'
+Step3. Update 'Factory-Cassandra-input_File.csv'
 
-cassandrapath=""
-password=""
-logfile=""
+    "Host_Name","DB_USER","DB_PASSWD"
+
+Step4. Update the below parameters in 'Factory-Cassandra-infogatherfile.sh' script.
+
+       CSV_FILE=""
+
+       SQL_FILE=""
+
+       OUTPUT_DIR=""
 
 Note:-
 . Highlighted are Mandatory Fields
@@ -42,10 +42,15 @@ Note:-
 
 
 Execute Bash :
-            	chmod +x ./infogatherfile.sh
+            	chmod +x ./Factory-Cassandra-infogatherfile.sh
 			 
-		         sh infogatherfile.sh
+		         sh Factory-Cassandra-infogatherfile.sh
 		   
-Step4. Once the execution completed, you can check the Output file in the path you have provided for logfile parameter.
+Step5. Once the execution completed, you can check the Output file in the path you have provided for logfile parameter.
 
-Step5. Share that log file to Factory Team
+Step6. Share that log file to Factory Team
+
+
+
+
+
