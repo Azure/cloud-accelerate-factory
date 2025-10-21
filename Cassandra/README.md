@@ -49,7 +49,14 @@ Execute Bash :
 Step5. Once the execution completed, you can check the Output file in the path you have provided for logfile parameter.
 
 Step6. Share that log file to Factory Team
+Kindly follow the execution instructions mentioned in attached documents. 
+If there is/are any queries, please let us know, we will connect and check.
 
+**Disclaimer:**
+These scripts are intended for use of Info Gather Assessment utility and do not interact with the user databases or gather any sensitive information (e.g passwords, PI data etc.). 
+These scripts are provided as-is to merely capture metadata information ONLY. While every effort has been made to ensure that accuracy and reliability of the scripts, 
+it is recommended to review and test them in a non-production environment before deploying them in a production environment.
+It is important to note that these scripts should be modified with consultation of Microsoft.
 
 
 
