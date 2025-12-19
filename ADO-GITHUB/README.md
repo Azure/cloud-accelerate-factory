@@ -1,5 +1,5 @@
 ## Flow Chart
-![Migration Flow](image/flow-diagram-ado2gh.png)
+![Migration Flow](image/flow-diagram-ado2ghmigration.png)
 
  
 ## Prerequisites
