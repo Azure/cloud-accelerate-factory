@@ -1,468 +1,123 @@
-**Oracle Info Gathering Automation (OSS DB MigrationFactory)**
 
-**1\. Overview**
+# Oracle Info Gathering Automation (OSS DB Migration Factory)<br />
+
+## Description<br />
+This script is designed for Oracle database information gathering to support migration assessment, readiness analysis, and capacity planning.<br />
+The scripts collect Oracle configuration and metadata only and execute read-only SQL queries.<br />
+No DDL or DML operations are performed, and no databases are modified.<br />
+No application or user data is collected, and passwords are never logged.<br />
+The scripts are provided as-is and should be reviewed and tested in a non-production environment before execution.<br />
+
+# Prerequisites:<br />
+
+**OS Support**<br />
+This script is compatible with the following operating systems:<br />
+Windows 10 or later<br />
+Linux RHEL v7 or later , Ubuntu v14 or later<br />
+
+# Pre-requisites<br />
+Execute the below command prior running PowerShell scripts:<br />
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass<br />
+
+# Software Requirements<br />
+
+**Windows**<br />
+PowerShell 7.x – https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows<br />
+Oracle Instant Client (SQL*Plus – Mandatory) – https://www.oracle.com/database/technologies/instant-client.html<br />
+
+**Linux**<br />
+PowerShell 7.x (pwsh) – https://learn.microsoft.com/en-us/powershell/scripting/install/install-rhel<br />
+Oracle Instant Client (SQL*Plus – Mandatory) – https://www.oracle.com/database/technologies/instant-client.html<br />
+
+# Add PATH in Environment Variables<br />
+
+**Windows**<br />
+Add the following paths to Environment Variables → PATH:<br />
+Oracle Instant Client (e.g. C:\oracle\instantclient_21_x)<br />
+PowerShell (e.g. C:\Program Files\PowerShell\7\)<br />
+Verify installation:<br />
+sqlplus -v<br />
+pwsh -v<br />
+
+**Linux**<br />
+Ensure binaries are accessible:<br />
+which sqlplus<br />
+which pwsh<br />
+Typical paths:<br />
+/usr/bin/sqlplus<br />
+/usr/bin/pwsh<br />
+
+# Info Gather for Migration:<br />
+
+## Steps To-Do<br />
+
+**Step 1. Prepare Oracle Database User**<br />
+Create or identify a dedicated read-only Oracle user with access to catalog and performance views.<br />
+Minimum required privileges:<br />
+GRANT CREATE SESSION TO oracle_dbuser;<br />
+GRANT SELECT_CATALOG_ROLE TO oracle_dbuser;<br />
+GRANT SELECT ON sys.aux_stats$ TO oracle_dbuser;<br />
+
+Dynamic performance views access:<br />
+GRANT SELECT ON v_$instance TO oracle_dbuser;<br />
+GRANT SELECT ON v_$database TO oracle_dbuser;<br />
+GRANT SELECT ON v_$parameter TO oracle_dbuser;<br />
+GRANT SELECT ON v_$sgainfo TO oracle_dbuser;<br />
+GRANT SELECT ON v_$system_event TO oracle_dbuser;<br />
+GRANT SELECT ON v_$log TO oracle_dbuser;<br />
+GRANT SELECT ON v_$log_history TO oracle_dbuser;<br />
+GRANT SELECT ON v_$restore_point TO oracle_dbuser;<br />
+GRANT SELECT ON v_$cell_state TO oracle_dbuser;<br />
+GRANT SELECT ON v_$pdbs TO oracle_dbuser;<br />
+GRANT SELECT ON gv_$instance TO oracle_dbuser;<br />
+
+Note: Oracle internally maps V$ views to V_$. Grants must be applied on V_$ objects.<br />
+
+**Step 2. Update Oracle Server Input File**<br />
+Open the input file:<br />
+Factory_Oracle_Server_Input_file.csv<br />
+
+Update the file using the below format:<br />
+"Host_Name","User_ID","Password","Port","Service_Name","Approval_Status"<br />
+
+Notes:<br />
+Highlighted fields are mandatory<br />
+Approval_Status must be Yes for execution<br />
+Multiple Oracle databases are supported<br />
+Default port is 1521 if not specified<br />
+If Password is not provided, interactive input will be required<br />
+Passwords are never logged<br />
+
+**Step 3. Oracle Server Info Gathering Execution**<br />
+
+Windows:<br />
+powershell.exe .\Oracle_Info_Gathering_Automation.ps1<br />
+
+Linux:<br />
+pwsh ./Oracle_Info_Gathering_Automation.ps1<br />
+
+During execution, the script will prompt for:<br />
+SQL script path<br />
+LOG directory path<br />
+RESULT directory path<br />
+Input CSV file<br />
+Password (if not provided)<br />
 
-This automation collects **Oracle database metadata** for**migration and assessment purposes**.
+**Step 4. Review Output and Logs**<br />
+Once execution is completed, review the following folders:<br />
 
-The solution uses:
+Results:<br />
+RESULT/result_<dbname>.txt<br />
 
-*   **PowerShell** for orchestration
-    
+Logs:<br />
+LOG/exec_<dbname>.log<br />
+LOG/summary_<timestamp>.txt<br />
 
-*   **Oracle SQL\*Plus** for database connectivity
-    
+**Step 5. Zip and Share Output**<br />
+Zip and share the RESULT and LOG folders.<br />
+Kindly follow the execution instructions mentioned above. If there are any queries, please let us know and we will connect to assist.<br />
 
-*   A **read-only SQL script** to gather Oracle configuration, sizing, and feature usage metadata
-    
+# Exit Codes<br />
 
-The script supports **multiple Oracle databases**,controlled via a **CSV input file**, and produces:
-
-*   Per-database logs
-    
-
-*   Per-database result files
-
-*   **Disclaimer:**
-These scripts are intended for use of Info Gather Assessment utility and do not interact with the user databases or gather any sensitive information (e.g passwords, PI data etc.). 
-These scripts are provided as-is to merely capture metadata information ONLY. While every effort has been made to ensure that accuracy and reliability of the scripts, 
-it is recommended to review and test them in a non-production environment before deploying them in a production environment.
-It is important to note that these scripts should be modified with consultation of Microsoft.
-    
-
-*   A consolidated execution summary
-    
-
- **The solution isread-only and non-intrusive.**
-
-**2\. Supported Operating Systems**
-
-**Windows**
-
-*   Windows 10 or later
-    
-
-**Linux**
-
-*   RHEL v7 or later
-    
-
-*   Ubuntu v14 or later
-    
-
-**3\. PowerShell Prerequisites**
-
-**Execution Policy (Mandatory)**
-
-Run once per user before executing the script:
-
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicyBypass
-
-**4\. Software Requirements**
-
-**4.1 PowerShell**
-
-**OS**
-
-**Requirement**
-
-Windows
-
-PowerShell 7.x
-
-Linux
-
-PowerShell 7.x (pwsh)
-
-**Installation**
-
-*   Windows [https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows)
-    
-
-*   Linux [https://learn.microsoft.com/en-us/powershell/scripting/install/install-rhel](https://learn.microsoft.com/en-us/powershell/scripting/install/install-rhel)
-    
-
-**4.2 Oracle Client (SQL\*Plus) – Mandatory**
-
-The script **requires SQL\*Plus** and will not run withoutit.
-
-**OS**
-
-**Requirement**
-
-Windows
-
-Oracle Instant Client (SQL\*Plus)
-
-Linux
-
-Oracle Instant Client (SQL\*Plus)
-
-**Download**[https://www.oracle.com/database/technologies/instant-client.html](https://www.oracle.com/database/technologies/instant-client.html)
-
-**4.3 PATH Configuration**
-
-**Windows**
-
-Add the following to **Environment Variables → PATH**:
-
-C:\\oracle\\instantclient\_21\_x
-
-C:\\Program Files\\PowerShell\\7\\
-
-Verify:
-
-sqlplus -v
-
-pwsh -v
-
-**Linux**
-
-Ensure binaries are accessible:
-
-which sqlplus
-
-which pwsh
-
-Typical paths:
-
-/usr/bin/sqlplus
-
-/usr/bin/pwsh
-
-**5\. Script Components**
-
-**Component**
-
-**Description**
-
-Oracle\_Info\_Gathering\_Automation.ps1
-
-Main PowerShell automation
-
-ora\_db\_gather.sql
-
-Oracle read-only assessment SQL
-
-Factory\_Oracle\_Server\_Input\_file.csv
-
-Input database list
-
-LOG/
-
-Execution logs
-
-RESULT/
-
-SQL output per database
-
-**6\. Input CSV File**
-
-**File Name**
-
-Factory\_Oracle\_Server\_Input\_file.csv
-
-**Required Columns**
-
-"Host\_Name","User\_ID","Password","Port","Service\_Name","Approval\_Status"
-
-**Column Description**
-
-**Column**
-
-**Description**
-
-Host\_Name
-
-Oracle DB hostname or IP
-
-User\_ID
-
-Oracle username
-
-Password
-
-Optional (prompted if empty)
-
-Port
-
-Optional (default: 1521)
-
-Service\_Name
-
-Oracle service name
-
-Approval\_Status
-
-Must be YES to execute
-
-**Notes**
-
-*   Only rows with Approval\_Status = YES are processed
-    
-
-*   Multiple databases are supported
-    
-
-*   Passwords are **never logged**
-    
-
-**7\. Oracle Database User Prerequisites (SQL Script)**
-
-The SQL script queries:
-
-*   DBA views
-    
-
-*   Dynamic performance views (V$, GV$)
-    
-
-*   SYS-owned tables
-    
-
-The Oracle user must be **read-only** but **highlyprivileged**.
-
-**7.1 Recommended User Model**
-
-**Best Practice (Recommended):**
-
-*   Dedicated assessment user
-    
-
-*   Read-only
-    
-
-*   Catalog access
-    
-
-**7.2 Minimum Required Privileges**
-
-**Mandatory Roles (Simplest & Recommended)**
-
-GRANT CREATE SESSION TO oracle\_dbuser;
-
-GRANT SELECT\_CATALOG\_ROLE TO oracle\_dbuser;
-
-GRANT SELECT ON sys.aux\_stats$ TO oracle\_dbuser;
-
-**7.3 Dynamic Performance Views Access (V$ / GV$)**
-
-Required for:
-
-*   Instance metadata
-    
-
-*   Memory sizing
-    
-
-*   RAC detection
-    
-
-*   Redo and performance statistics
-    
-
-*   Exadata detection
-    
-
-GRANT SELECT ON v\_$instance        TO oracle\_dbuser;
-
-GRANT SELECT ON v\_$database        TO oracle\_dbuser;
-
-GRANT SELECT ON v\_$parameter       TO oracle\_dbuser;
-
-GRANT SELECT ON v\_$sgainfo         TO oracle\_dbuser;
-
-GRANT SELECT ON v\_$system\_event    TO oracle\_dbuser;
-
-GRANT SELECT ON v\_$log             TO oracle\_dbuser;
-
-GRANT SELECT ON v\_$log\_history     TO oracle\_dbuser;
-
-GRANT SELECT ON v\_$restore\_point   TO oracle\_dbuser;
-
-GRANT SELECT ON v\_$cell\_state      TO oracle\_dbuser;
-
-GRANT SELECT ON v\_$pdbs            TO oracle\_dbuser;
-
-GRANT SELECT ON gv\_$instance       TO oracle\_dbuser;
-
-Oracle internally maps V$ → V\_$.Grants must be issued on V\_$ objects.
-
-**7.4 DBA Views Queried by the SQL**
-
-Non-exhaustive list:
-
-*   DBA\_OBJECTS
-    
-
-*   DBA\_SEGMENTS
-    
-
-*   DBA\_DATA\_FILES
-    
-
-*   DBA\_FREE\_SPACE
-    
-
-*   DBA\_TABLESPACES
-    
-
-*   DBA\_LOBS
-    
-
-*   DBA\_SERVICES
-    
-
-*   DBA\_SQL\_PROFILES
-    
-
-*   DBA\_SQL\_PLAN\_BASELINES
-    
-
-*   DBA\_SQL\_PATCHES
-    
-
-*   DBA\_DIRECTORIES
-    
-
-*   DBA\_DB\_LINKS
-    
-
-*   DBA\_AUDIT\_POLICIES
-    
-
-*   DBA\_PROFILES
-    
-
-*   ALL\_SOURCE
-    
-
-SELECT\_CATALOG\_ROLE covers all required access.
-
-**7.5 RAC, Exadata & CDB Notes**
-
-**Feature**
-
-**Requirement**
-
-RAC
-
-Access to GV$ views
-
-**8\. Security & Compliance**
-
-*   SQL is **100% read-only**
-    
-
-*   No DDL or DML
-    
-
-*   No data modification
-    
-
-*   No application or user data extracted
-    
-
-*   Passwords handled securely via SecureString
-    
-
-*   No credentials written to logs
-    
-
-This access model is standard for:
-
-*   Migration assessments
-    
-
-*   Capacity planning
-    
-
-*   Readiness analysis
-    
-
-**9\. Execution Steps**
-
-**Windows**
-
-powershell.exe .\\Oracle\_Info\_Gathering\_Automation.ps1
-
-**Linux**
-
-pwsh ./Oracle\_Info\_Gathering\_Automation.ps1
-
-**10\. Runtime Prompts**
-
-The script interactively prompts for:
-
-*   SQL script path
-    
-
-*   LOG directory
-    
-
-*   RESULT directory
-    
-
-*   CSV input file
-    
-
-*   Password (if not provided)
-    
-
-**11\. Output Structure**
-
-**Result Files**
-
-RESULT/result\_\_\_.txt
-
-**Log Files**
-
-LOG/exec\_\_\_.log
-
-**Summary**
-
-LOG/summary\_.txt
-
-**12\. Exit Codes**
-
-**Code**
-
-**Meaning**
-
-0
-
-All databases executed successfully
-
-1
-
-One or more failures
-
-**13\. information:**
-
-These scripts are provided **as-is** for Oracleinformation gathering and migration assessment purposes only.
-
-They:
-
-*   Do not collect sensitive data
-    
-
-*   Do not modify databases
-    
-
-It is strongly recommended to:
-
-*   Review SQL scripts
-    
-
-*   Test in non-production environments
-    
-
-*   Use least-privilege accounts
-    
-
-*   Run with customer and security approval
-
-**Disclaimer:**
-These scripts are intended for use of Info Gather Assessment utility and do not interact with the user databases or gather any sensitive information (e.g passwords, PI data etc.). 
-These scripts are provided as-is to merely capture metadata information ONLY. While every effort has been made to ensure that accuracy and reliability of the scripts, 
-it is recommended to review and test them in a non-production environment before deploying them in a production environment.
-It is important to note that these scripts should be modified with consultation of Microsoft.
+0 – All databases executed successfully<br />
+1 – One or more database executions failed<br />
