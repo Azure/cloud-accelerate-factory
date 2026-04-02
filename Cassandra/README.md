@@ -24,31 +24,22 @@ GIT Repo:  https://github.com/Azure/cloud-accelerate-factory/blob/dev/Cassandra/
 
 Step2. Unzip Info-Gather-cassandra.zip , cd ./csu-cassandra-mf/PUBLIC
 
-Step3. Update 'Factory-Cassandra-input_File.csv'
+Step3. Update 'Factory_Cassandra_Input_File.csv'
 
     "Host_Name","DB_USER","DB_PASSWD"
 
-Step4. Update the below parameters in 'Factory-Cassandra-infogatherfile.sh' script.
-
-       CSV_FILE=""
-
-       SQL_FILE=""
-
-       OUTPUT_DIR=""
-
-Note:-
-. Highlighted are Mandatory Fields
-. Update the mentioned parameters manually in infogatherfile.sh
+Step4. 
 
 
 Execute Bash :
-            	chmod +x ./Factory-Cassandra-infogatherfile.sh
+            	chmod +x ./Factory-Cassandra-Bash.sh
 			 
-		         sh Factory-Cassandra-infogatherfile.sh
+		         ./Factory-Cassandra-Bash.sh
 		   
-Step5. Once the execution completed, you can check the Output file in the path you have provided for logfile parameter.
+Step5. Once the execution completed, you can check the Output & Logs folders.
 
-Step6. Share that log file to Factory Team
+Step6. Zip the Output & Logs Folders and share to Factory Team
+
 Kindly follow the execution instructions mentioned in attached documents. 
 If there is/are any queries, please let us know, we will connect and check.
 
