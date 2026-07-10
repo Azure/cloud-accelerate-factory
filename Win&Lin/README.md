@@ -1,6 +1,6 @@
 # Deploy the Azure VM Inventory Workbook
 
-[![Deploy to Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcustomer-success-microsoft%2Fcsu-win-mf%2Fdev%2Fazuredeploy.json)
+[![Deploy to Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fcloud-accelerate-factory%2Fdev%2FWin%2526Lin%2Fazuredeploy.json)
 
 You can deploy the workbook directly to your Azure environment using the button above.
 
