@@ -1,6 +1,6 @@
 # Deploy the Azure VM Inventory Workbook
 
-[![Deploy to Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fcloud-accelerate-factory%2Fdev%2FWin%2526Lin%2Fazuredeploy.json)
+[![Deploy to Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcustomer-success-microsoft%2Fcsu-win-mf%2Fdev%2Fazuredeploy.json)
 
 You can deploy the workbook directly to your Azure environment using the button above.
 
@@ -124,6 +124,21 @@ If monitoring **2 subscriptions**:
 - ✅ **Contributor** access to Resource Group (for deployment — can be revoked after deployment)
 
 ---
+## Filters and Scoping
+
+All tabs respond dynamically to the **five global filters** at the top of the workbook:
+
+| Filter | Description |
+|---|---|
+| **Subscription** | Multi-select — defaults to all your subscriptions |
+| **Resource Group** | Multi-select — dynamically populated from VMs in the selected subscription(s); defaults to all |
+| **Location** | Filter by Azure region; dynamically populated from your VMs |
+| **OS Type** | Windows / Linux |
+| **Power State** | Running, Deallocated, Stopped, etc. |
+
+> **Tip:** Apply filters before exporting to download only the data you need.
+
+---
 
 ## Workbook Structure
 
@@ -167,21 +182,6 @@ Aggregated disk count and size per VM:
 - Data disk count
 - Total data disk storage (GB)
 - Total storage (OS + data disks, GB)
-
----
-
-## Filters and Scoping
-
-All tabs respond dynamically to the **four global filters** at the top of the workbook:
-
-| Filter | Description |
-|---|---|
-| **Subscription** | Multi-select — defaults to all your subscriptions |
-| **Location** | Filter by Azure region; dynamically populated from your VMs |
-| **OS Type** | Windows / Linux |
-| **Power State** | Running, Deallocated, Stopped, etc. |
-
-> **Tip:** Apply filters before exporting to download only the data you need.
 
 ---
 
